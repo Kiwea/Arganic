@@ -19,4 +19,4 @@ build-backend = "setuptools.build_meta"
 Homepage = "https://github.com/Kiwea/Arganic"
 
 [project.optional-dependencies]
-test = ["pytest"]
+test = ["pytest", "pytest-cov"]
