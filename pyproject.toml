@@ -1,0 +1,22 @@
+[project]
+name = "Arganic"
+version = "0.1"
+description = ""
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{name = "Kiwea"}]
+license = {text = "GNU General Public License v3 (GPLv3)"}
+classifiers = [
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)"
+]
+dependencies = []
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/Kiwea/Arganic"
+
+[project.optional-dependencies]
+test = ["pytest"]
