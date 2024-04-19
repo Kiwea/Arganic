@@ -1,7 +1,7 @@
 import os.path
 import errno
-from abc import abstractmethod, ABC
 import re
+from abc import abstractmethod, ABC
 
 
 class Validator(ABC):

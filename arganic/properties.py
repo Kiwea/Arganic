@@ -4,13 +4,13 @@ from arganic.validators import Validator
 
 class Property:
 
-    def __init__(self, **kwargs: str | Type | bool | tuple | int | dict) -> None:
+    def __init__(self, **kwargs: Any) -> None:
         self.__default: Any = kwargs.get('default', None)
         self.name: str = ''
         self.__read_only: bool = kwargs.get('read_only', True)
         self.__required: bool = kwargs.get('required', True)
-        self.__type: Type = kwargs.get('type', Any)
-        self.__validators: tuple[Validator] = kwargs.get('validators', ())
+        self.__type: Type | tuple[Type] = kwargs.get('type', Any)
+        self.__validator: Validator | tuple[Validator] = kwargs.get('validator', ())
         self.__choices: tuple = kwargs.get('choices')
         if self.default is not None:
             self.validate(self.default)
@@ -44,8 +44,11 @@ class Property:
         # process all validators
         # map(lambda obj: getattr(obj, 'validate')(value), self.validators)
         if value is not None:
-            for validator in self.validators:
-                validator.validate(value)
+            if isinstance(self.validator, Validator):
+                self.validator.validate(value)
+            elif isinstance(self.validator, tuple):
+                for validator in self.validator:
+                    validator.validate(value)
         return True
 
     @property
@@ -65,12 +68,12 @@ class Property:
         return self.__required
 
     @property
-    def type(self) -> Type:
+    def type(self) -> Type | tuple[Type]:
         return self.__type
 
     @property
-    def validators(self) -> tuple[Validator]:
-        return self.__validators
+    def validator(self) -> Validator | tuple[Validator]:
+        return self.__validator
 
 
 class Properties:
@@ -96,9 +99,10 @@ class Properties:
             [decorated.__module__, decorated.__qualname__]
         )
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, decorated: type | Callable, *args, **kwargs) -> None:
         self.__values: dict = args[0] if args else kwargs
-        self.__decorated:str = ''
+        self.__decorated: str = Properties.get_decorated_id(decorated)
+        self.validate()
 
     def set_decorated(self, decorated):
         self.__decorated = Properties.get_decorated_id(
@@ -140,9 +144,8 @@ def class_properties(**_properties):
         class ClassProperties(decorated_class):
             def __init__(self, *args, **kwargs) -> None:
                 Properties.set_properties(decorated_class, _properties)
-                super().__init__(*args, **kwargs)
-                super().set_decorated(decorated_class)
-                super().validate()
+                super().__init__(decorated_class, *args, **kwargs)
+                #super().validate()
         return ClassProperties
     return properties_decorator
 
@@ -152,9 +155,17 @@ def method_arguments(**_arguments):
     def arguments_decorator(decorated_func) -> Callable:
         def method(instance, *args, **kwargs):
             Properties.set_properties(decorated_func, _arguments)
-            props = Properties(*args, **kwargs)
-            props.set_decorated(decorated_func)
-            props.validate()
+            method.arguments = Properties(decorated_func, *args, **kwargs)
             return decorated_func(instance, *args, **kwargs)
         return method
+    return arguments_decorator
+
+
+def function_arguments(**_arguments):
+    def arguments_decorator(decorated_func) -> Callable:
+        def function(*args, **kwargs):
+            Properties.set_properties(decorated_func, _arguments)
+            function.arguments = Properties(decorated_func, *args, **kwargs)
+            return decorated_func(*args, **kwargs)
+        return function
     return arguments_decorator

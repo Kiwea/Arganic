@@ -12,7 +12,7 @@ By leveraging Python's '*args' and '**kwargs', Arganic
 empowers developers to enhance the functionality of
 their codebase with ease.
 
-##Key Features:
+## Key Features:
 
  - **Decorators for Classes, Methods, and Functions**: Apply decorators to classes, methods, and functions to extend their functionality and behavior.
  - **Required Parameters:** Define required parameters for methods and functions to ensure essential inputs are provided.

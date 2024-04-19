@@ -1,68 +1,4 @@
-from arganic.properties import (
-    class_properties,
-    method_arguments,
-    Properties,
-    Property
-)
-from arganic.validators import (
-    File,
-    Dir,
-    Email,
-    Url,
-    MaxLength,
-    MinLength
-)
-
-
-@class_properties(
-    int_prop=Property(
-        type=int,
-        default=1,
-        read_only=False
-    ),
-    is_required=Property(),
-    is_choices=Property(
-        type=str,
-        choices=('a', 'b', 'c'),
-        required=False
-    ),
-    is_dir=Property(
-        type=str,
-        required=False,
-        validators=(Dir(),)
-    ),
-    is_file=Property(
-        type=str,
-        required=False,
-        validators=(File(),)
-    )
-)
-class DecoratedClass(Properties):
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-
-    @method_arguments(
-        first_arg=Property(
-            type=float
-        ),
-        second_arg=Property(
-            type=str,
-            validators=(MinLength(2), MaxLength(4),),
-            required=False
-        ),
-        email=Property(
-            type=str,
-            validators=(Email(),),
-            required=False
-        ),
-        url=Property(
-            type=str,
-            validators=(Url(),),
-            required=False
-        )
-    )
-    def method_1(self, *args, **kwargs) -> None:
-        pass
+from tests.decorated import DecoratedClass, decorated_function
 
 
 class TestProperties:
@@ -202,6 +138,14 @@ class TestProperties:
         else:
             assert False
 
+    def test_get_int_prop(selfself):
+        dc = DecoratedClass(
+            int_prop=99,
+            is_required='dfr'
+        )
+        assert dc.get_int_prop() == 99
+
+
     def test_method(self):
         dc = DecoratedClass(
             int_prop=1,
@@ -210,7 +154,7 @@ class TestProperties:
             is_dir='tests/test_dir',
             is_file='tests/test_dir/test_file.txt'
         )
-        dc.method_1(first_arg=12.9)
+        dc.decorated_method(first_arg=12.9)
         assert True
 
     def test_validators_length(self):
@@ -223,8 +167,8 @@ class TestProperties:
         )
 
         try:
-            dc.method_1(
-                first_arg=12.9,
+            dc.decorated_method(
+                first_arg=15.4,
                 second_arg='rrr'
             )
         except ValueError:
@@ -242,8 +186,8 @@ class TestProperties:
         )
 
         try:
-            dc.method_1(
-                first_arg=12.9,
+            dc.decorated_method(
+                first_arg=10.3,
                 second_arg='r'
             )
         except ValueError:
@@ -261,8 +205,8 @@ class TestProperties:
         )
 
         try:
-            dc.method_1(
-                first_arg=12.9,
+            dc.decorated_method(
+                first_arg=8.7,
                 second_arg='return'
             )
         except ValueError:
@@ -280,8 +224,8 @@ class TestProperties:
         )
 
         try:
-            dc.method_1(
-                first_arg=12.9,
+            dc.decorated_method(
+                first_arg=2.1,
                 email='test@example.com'
             )
         except ValueError:
@@ -299,8 +243,8 @@ class TestProperties:
         )
 
         try:
-            dc.method_1(
-                first_arg=12.9,
+            dc.decorated_method(
+                first_arg=1.7,
                 email='dd@com'
             )
         except ValueError:
@@ -318,8 +262,8 @@ class TestProperties:
         )
 
         try:
-            dc.method_1(
-                first_arg=12.9,
+            dc.decorated_method(
+                first_arg=45.6,
                 url='https://example.com'
             )
         except ValueError:
@@ -337,11 +281,35 @@ class TestProperties:
         )
 
         try:
-            dc.method_1(
-                first_arg=12.9,
+            dc.decorated_method(
+                first_arg=222.7,
                 url='example.com'
             )
         except ValueError:
             assert True
         else:
             assert False
+
+    def test_method_return(self):
+        dc = DecoratedClass(
+            int_prop=1,
+            is_required='dfr',
+            is_choices='a',
+            is_dir='tests/test_dir',
+            is_file='tests/test_dir/test_file.txt'
+        )
+        assert dc.decorated_method(first_arg=444.5) == 444.5
+
+    def test_function_1_return(self):
+        assert decorated_function(arg_1='d') == 'd'
+
+    def test_function_1_not_same(self):
+        assert decorated_function(arg_1='d') != 'f'
+
+    def test_function_1_type_int(self):
+        decorated_function(arg_1='d', arg_2=12)
+        assert True
+
+    def test_function_1_type_float(self):
+        decorated_function(arg_1='d', arg_2=12.9)
+        assert True

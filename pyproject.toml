@@ -16,7 +16,10 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
-Homepage = "https://github.com/Kiwea/Arganic"
+Homepage = "https://github.com/kiwea/arganic"
+Changelog = "https://github.com/kiwea/arganic/releases"
+Issues = "https://github.com/kiwea/arganic/issues"
+CI = "https://github.com/kiwea/arganic/actions"
 
 [project.optional-dependencies]
 test = ["pytest", "pytest-cov"]
