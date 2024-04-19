@@ -153,7 +153,7 @@ class TestProperties:
                 int_prop=1,
                 is_required='dfr',
                 is_choices='a',
-                is_dir='test_dir'
+                is_dir='tests/test_dir'
             )
         except FileNotFoundError:
             assert False
@@ -180,8 +180,8 @@ class TestProperties:
                 int_prop=1,
                 is_required='dfr',
                 is_choices='a',
-                is_dir='test_dir',
-                is_file='test_dir/test_file.txt'
+                is_dir='tests/test_dir',
+                is_file='tests/test_dir/test_file.txt'
             )
         except FileNotFoundError:
             assert False
@@ -194,7 +194,7 @@ class TestProperties:
                 int_prop=1,
                 is_required='dfr',
                 is_choices='a',
-                is_dir='test_dir',
+                is_dir='tests/test_dir',
                 is_file='fff'
             )
         except FileNotFoundError:
@@ -207,8 +207,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='test_dir',
-            is_file='test_dir/test_file.txt'
+            is_dir='tests/test_dir',
+            is_file='tests/test_dir/test_file.txt'
         )
         dc.method_1(first_arg=12.9)
         assert True
@@ -218,8 +218,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='test_dir',
-            is_file='test_dir/test_file.txt'
+            is_dir='tests/test_dir',
+            is_file='tests/test_dir/test_file.txt'
         )
 
         try:
@@ -237,8 +237,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='test_dir',
-            is_file='test_dir/test_file.txt'
+            is_dir='tests/test_dir',
+            is_file='tests/test_dir/test_file.txt'
         )
 
         try:
@@ -256,8 +256,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='test_dir',
-            is_file='test_dir/test_file.txt'
+            is_dir='tests/test_dir',
+            is_file='tests/test_dir/test_file.txt'
         )
 
         try:
@@ -275,8 +275,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='test_dir',
-            is_file='test_dir/test_file.txt'
+            is_dir='tests/test_dir',
+            is_file='tests/test_dir/test_file.txt'
         )
 
         try:
@@ -294,8 +294,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='test_dir',
-            is_file='test_dir/test_file.txt'
+            is_dir='tests/test_dir',
+            is_file='tests/test_dir/test_file.txt'
         )
 
         try:
@@ -313,8 +313,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='test_dir',
-            is_file='test_dir/test_file.txt'
+            is_dir='tests/test_dir',
+            is_file='tests/test_dir/test_file.txt'
         )
 
         try:
@@ -332,8 +332,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='test_dir',
-            is_file='test_dir/test_file.txt'
+            is_dir='tests/test_dir',
+            is_file='tests/test_dir/test_file.txt'
         )
 
         try:
