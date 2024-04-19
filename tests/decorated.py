@@ -1,9 +1,9 @@
-from arganic.properties import (
+from arganic.arguments import (
     class_properties,
     method_arguments,
     function_arguments,
-    Properties,
-    Property
+    ArgumentHandler,
+    Argument
 )
 from arganic.validators import (
     File,
@@ -16,29 +16,29 @@ from arganic.validators import (
 
 
 @class_properties(
-    int_prop=Property(
+    int_prop=Argument(
         type=int,
         default=1,
         read_only=False
     ),
-    is_required=Property(),
-    is_choices=Property(
+    is_required=Argument(),
+    is_choices=Argument(
         type=str,
         choices=('a', 'b', 'c'),
         required=False
     ),
-    is_dir=Property(
+    is_dir=Argument(
         type=str,
         required=False,
         validator=Dir()
     ),
-    is_file=Property(
+    is_file=Argument(
         type=str,
         required=False,
         validator=File()
     )
 )
-class DecoratedClass(Properties):
+class DecoratedClass(ArgumentHandler):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         print(self.get('int_prop'))
@@ -47,20 +47,20 @@ class DecoratedClass(Properties):
         return self.get('int_prop')
 
     @method_arguments(
-        first_arg=Property(
+        first_arg=Argument(
             type=float
         ),
-        second_arg=Property(
+        second_arg=Argument(
             type=str,
             validator=(MinLength(2), MaxLength(4)),
             required=False
         ),
-        email=Property(
+        email=Argument(
             type=str,
             validator=Email(),
             required=False
         ),
-        url=Property(
+        url=Argument(
             type=str,
             validator=Url(),
             required=False
@@ -71,10 +71,10 @@ class DecoratedClass(Properties):
 
 
 @function_arguments(
-    arg_1=Property(
+    arg_1=Argument(
         type=str
     ),
-    arg_2=Property(
+    arg_2=Argument(
         type=(int, float),
         required=False
     )

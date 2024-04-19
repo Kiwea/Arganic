@@ -1,8 +1,8 @@
-from typing import Type, Any, final, Callable
+from typing import Type, Any, Callable
 from arganic.validators import Validator
 
 
-class Property:
+class Argument:
 
     def __init__(self, **kwargs: Any) -> None:
         self.__default: Any = kwargs.get('default', None)
@@ -10,7 +10,7 @@ class Property:
         self.__read_only: bool = kwargs.get('read_only', True)
         self.__required: bool = kwargs.get('required', True)
         self.__type: Type | tuple[Type] = kwargs.get('type', Any)
-        self.__validator: Validator | tuple[Validator] = kwargs.get('validator', ())
+        self.__validator: Validator | tuple[Validator] = kwargs.get('validator')
         self.__choices: tuple = kwargs.get('choices')
         if self.default is not None:
             self.validate(self.default)
@@ -76,64 +76,56 @@ class Property:
         return self.__validator
 
 
-class Properties:
+class ArgumentHandler:
 
-    __properties: dict[str, dict[str, Property]] = {}
+    __arguments: dict[str, dict[str, Argument]] = {}
 
     @staticmethod
-    def set_properties(decorated: type, props: dict[str, Property]):
-        if not Properties.has_properties(decorated):
-            for key, value in props.items():
+    def set_arguments(decorated: type, arguments: dict[str, Argument]):
+        if not ArgumentHandler.__has_arguments(decorated):
+            for key, value in arguments.items():
                 value.name = key
-            decorated_id = Properties.get_decorated_id(decorated)
-            Properties.__properties[decorated_id] = props
+            decorated_id = ArgumentHandler.__get_decorated_id(decorated)
+            ArgumentHandler.__arguments[decorated_id] = arguments
 
     @staticmethod
-    def has_properties(decorated: type) -> bool:
-        decorated_id = Properties.get_decorated_id(decorated)
-        return Properties.__properties.get(decorated_id) is not None
+    def __has_arguments(decorated: type) -> bool:
+        decorated_id = ArgumentHandler.__get_decorated_id(decorated)
+        return ArgumentHandler.__arguments.get(decorated_id) is not None
 
     @staticmethod
-    def get_decorated_id(decorated: type | Callable) -> str:
+    def __get_decorated_id(decorated: type | Callable) -> str:
         return '.'.join(
             [decorated.__module__, decorated.__qualname__]
         )
 
     def __init__(self, decorated: type | Callable, *args, **kwargs) -> None:
         self.__values: dict = args[0] if args else kwargs
-        self.__decorated: str = Properties.get_decorated_id(decorated)
-        self.validate()
+        self.__decorated: str = ArgumentHandler.__get_decorated_id(decorated)
+        self.__validate()
 
-    def set_decorated(self, decorated):
-        self.__decorated = Properties.get_decorated_id(
-            decorated
-        )
-
-    def get_property(self, name: str) -> Property:
-        prop = Properties.__properties.get(
+    def __get_argument(self, name: str) -> Argument:
+        prop = ArgumentHandler.__arguments.get(
             self.__decorated).get(name)
         if prop:
             return prop
 
         raise KeyError(f'The property {name} not exists for {self.__decorated}.')
 
-    @final
     def get(self, key: str) -> Any:
         return self.__values.get(
             key,
-            self.get_property(key).default
+            self.__get_argument(key).default
         )
 
-    @final
     def set(self, key: str, value: Any) -> None:
-        if self.get_property(key).read_only:
+        if self.__get_argument(key).read_only:
             raise ValueError(f'The property {key} is read-only in {self.__decorated}.')
-        if self.get_property(key).validate(value):
+        if self.__get_argument(key).validate(value):
             self.__values[key] = value
 
-    @final
-    def validate(self) -> bool:
-        props = Properties.__properties.get(self.__decorated)
+    def __validate(self) -> bool:
+        props = ArgumentHandler.__arguments.get(self.__decorated)
         for key, prop in props.items():
             prop.validate(self.__values.get(key))
         return True
@@ -143,7 +135,7 @@ def class_properties(**_properties):
     def properties_decorator(decorated_class) -> Type:
         class ClassProperties(decorated_class):
             def __init__(self, *args, **kwargs) -> None:
-                Properties.set_properties(decorated_class, _properties)
+                ArgumentHandler.set_arguments(decorated_class, _properties)
                 super().__init__(decorated_class, *args, **kwargs)
                 #super().validate()
         return ClassProperties
@@ -154,8 +146,8 @@ def class_properties(**_properties):
 def method_arguments(**_arguments):
     def arguments_decorator(decorated_func) -> Callable:
         def method(instance, *args, **kwargs):
-            Properties.set_properties(decorated_func, _arguments)
-            method.arguments = Properties(decorated_func, *args, **kwargs)
+            ArgumentHandler.set_arguments(decorated_func, _arguments)
+            method.arguments = ArgumentHandler(decorated_func, *args, **kwargs)
             return decorated_func(instance, *args, **kwargs)
         return method
     return arguments_decorator
@@ -164,8 +156,8 @@ def method_arguments(**_arguments):
 def function_arguments(**_arguments):
     def arguments_decorator(decorated_func) -> Callable:
         def function(*args, **kwargs):
-            Properties.set_properties(decorated_func, _arguments)
-            function.arguments = Properties(decorated_func, *args, **kwargs)
+            ArgumentHandler.set_arguments(decorated_func, _arguments)
+            function.arguments = ArgumentHandler(decorated_func, *args, **kwargs)
             return decorated_func(*args, **kwargs)
         return function
     return arguments_decorator
