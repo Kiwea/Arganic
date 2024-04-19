@@ -1,0 +1,30 @@
+.md-header__inner {
+    height: 4rem;
+}
+.md-header__button.md-logo img, .md-header__button.md-logo svg{
+    height:2rem;
+}
+[dir=ltr] .md-header__title {
+    margin-left: 0;
+}
+.md-header__title {
+    line-height:3.65rem;
+}
+
+.small-button {
+  font-size: 14px;
+}
+
+/* Hide >>> and ... in highlighted code*/
+span.gp {
+    display:none
+}
+
+@media screen and (max-width: 76.1875em){
+    .md-header__title {
+        line-height:2.4rem;
+    }
+    .md-header__inner {
+        height: auto;
+    }
+}
