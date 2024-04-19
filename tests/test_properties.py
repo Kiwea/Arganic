@@ -180,7 +180,7 @@ class TestProperties:
                 int_prop=1,
                 is_required='dfr',
                 is_choices='a',
-                is_dir='datas',
+                is_dir='test_dir',
                 is_file='test_dir/test_file.txt'
             )
         except FileNotFoundError:
