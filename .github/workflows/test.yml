@@ -24,4 +24,4 @@ jobs:
         pip install '.[test]'
     - name: Run tests
       run: |
-        pytest --path=tests --cov=arganic/
+        pytest -m --cov=arganic/
