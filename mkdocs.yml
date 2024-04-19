@@ -1,0 +1,87 @@
+site_name: Arganic Documentation
+extra_css:
+  - assets/stylesheets/extra.css
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - assets/javascripts/tablesort.js
+#watch:
+#  - templates
+markdown_extensions:
+  - abbr
+  - tables
+  - attr_list
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - md_in_html
+theme:
+  name: material
+  language: en
+  logo: assets/logo.png
+  palette:
+    scheme: slate
+  features:
+    - navigation.tracking
+    - navigation.expand
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.indexes
+    - toc.integrate
+    - toc.follow
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - navigation.footer
+    - content.code.annotate
+    - content.code.copy
+    - content.tooltips
+  icon:
+    admonition:
+      note: fontawesome/solid/note-sticky
+      abstract: fontawesome/solid/book
+      info: fontawesome/solid/circle-info
+      tip: fontawesome/solid/bullhorn
+      success: fontawesome/solid/check
+      question: fontawesome/solid/circle-question
+      warning: fontawesome/solid/triangle-exclamation
+      failure: fontawesome/solid/bomb
+      danger: fontawesome/solid/skull
+      bug: fontawesome/solid/robot
+      example: fontawesome/solid/flask
+      quote: fontawesome/solid/quote-left
+plugins:
+  - search
+#  - table-reader
+#  - literate-nav:
+#      nav_file: SUMMARY.md
+#      implicit_index: true
+#  - section-index
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            allow_inspection: true
+            show_source: false
+            docstring_style: numpy
+            docstring_section_style: list
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            show_root_heading: true
+            show_signature_annotations: true
+            trim_doctest_flags: true
+extra:
+  generator: false
+copyright: 2024 KIWEA
