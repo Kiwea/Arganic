@@ -1,7 +1,6 @@
 # Arganic
 
-Arganic: Flexible Decorators for
-Enhanced Python Classes and Functions
+Arganic: Decorator library for managing arguments of Python classes, methods and functions.
 
 Arganic is a Python library that provides a
 comprehensive set of decorators for managing classes,

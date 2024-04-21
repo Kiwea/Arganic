@@ -163,3 +163,4 @@ cython_debug/
 
 # Mkdocs generated docs
 sites/
+documentation.py

@@ -1,15 +1,17 @@
 # Arganic
 
-Arganic: Decorators for Enhanced Arguments Handling
-in Python Classes, Methods and Functions
+{==
 
-Arganic is a Python library that provides a
-comprehensive set of decorators for managing classes,
-methods, and functions with advanced features such as
-required parameters, validators, type checking,
-read/write accesses, default values, and choices.
-By leveraging Python's '*args' and '**kwargs', Arganic
-empowers developers to enhance the functionality of
+***Arganic*** is a lightweight **Python library** making it easy to manage **Arguments** for **Classes**, **Methods** or **Functions**.
+
+==}
+
+The library provides a comprehensive set of decorators with advanced features such as
+**required arguments**, **validators**, **type checking**,
+**read/write accesses**, **default values**, and **choices**.
+
+By leveraging Python's `*args` and `**kwargs`, *Arganic*
+empowers developers to enhance the readability and functionality of
 their codebase with ease.
 
 ## Key Features:
@@ -21,3 +23,23 @@ their codebase with ease.
  - **Read/Write Access Control:** Define read-only or write-only properties for classes, methods, and functions as needed.
  - **Default Values:** Set default values for function arguments, method parameters, and class properties to streamline code logic.
  - **Choice Selection:** Specify a list of choices for method arguments and function parameters, restricting input values to predefined options.
+
+## Installation
+
+### Pip
+
+### Git clone
+
+## Usage
+
+### Decorating Classes
+
+### Decorating Methods
+
+### Decorating functions
+
+### Using library
+
+### Customize validators
+
+## Contributing
