@@ -28,8 +28,7 @@ class Argument:
     -------
     validate(value)
         Validate the argument value based on the specified rules.
-
-    """
+   """
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         """
         Initialize the Argument object with specified properties.
@@ -57,84 +56,37 @@ class Argument:
 
     @property
     def name(self) -> str:
-        """
-        Get the name of the argument
-        Returns
-        -------
-        str
-        """
+        """ The argument name"""
         return self._name
 
     @property
     def choices(self) -> tuple:
-        """
-        Get the values choices of the argument.
-
-        Returns
-        -------
-        tuple
-            A tuple of choices the argument value can take.
-        """
+        """A tuple of choices the argument value can take."""
         return self.__choices
 
     @property
     def default(self) -> Any:
-        """
-        Get the default value of the argument.
-
-        Returns
-        -------
-        Any
-            The default value of the argument.
-        """
+        """The default value of the argument."""
         return self.__default
 
     @property
     def read_only(self) -> bool:
-        """
-        Check if the argument is read-only.
-
-        Returns
-        -------
-        bool
-            True if the argument is read-only, False otherwise.
-        """
+        """True if the argument is read-only, False otherwise."""
         return self.__read_only
 
     @property
     def required(self) -> bool:
-        """
-        Check if the argument is required.
-
-        Returns
-        -------
-        bool
-            True if the argument is required, False otherwise.
-        """
+        """True if the argument is required, False otherwise."""
         return self.__required
 
     @property
     def type(self) -> Type | tuple[Type]:
-        """
-        Get the data type(s) the argument value can take.
-
-        Returns
-        -------
-        Type | tuple[Type]
-            The data type of the argument value.
-        """
+        """The data type(s) the argument value can take."""
         return self.__type
 
     @property
     def validator(self) -> Validator | tuple[Validator]:
-        """
-        Get the validator(s) of the argument.
-
-        Returns
-        -------
-        Validator | tuple[Validator]
-            The validator function or a tuple of validator functions.
-        """
+        """The validator object or a tuple of validator objects."""
         return self.__validator
 
     def validate(self, value: Any) -> bool:
