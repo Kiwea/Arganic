@@ -3,10 +3,47 @@ from arganic.validators import Validator
 
 
 class Argument:
+    """Represents an argument with various properties.
 
-    def __init__(self, **kwargs: Any) -> None:
+    This class represents an argument with the following properties:
+
+    Attributes
+    ----------
+    name : str
+        The name of the argument.
+    default : Any, optional
+        The default value of the argument.
+    read_only : bool, default=True
+        Whether the argument is read-only.
+    required : bool, default=True
+        Whether the argument is required.
+    type : Type | tuple[Type], optional
+        The data type of the argument value.
+    validator : Validator | tuple[Validator], optional
+        A Validator object or list of Validator objects used to validate the argument value.
+    choices : tuple, optional
+        A tuple of choices the argument value can take.
+
+    Methods
+    -------
+    validate(value)
+        Validate the argument value based on the specified rules.
+
+    """
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        """
+        Initialize the Argument object with specified properties.
+
+        Parameters
+        ----------
+        *args : Any
+            Variable length argument list.
+        **kwargs : Any
+            Arbitrary keyword arguments.
+       """
+        kwargs = args[0] if args else kwargs
         self.__default: Any = kwargs.get('default', None)
-        self.name: str = ''
+        self._name: str = ''
         self.__read_only: bool = kwargs.get('read_only', True)
         self.__required: bool = kwargs.get('required', True)
         self.__type: Type | tuple[Type] = kwargs.get('type', Any)
@@ -18,7 +55,109 @@ class Argument:
             for choice in self.choices:
                 self.validate(choice)
 
-    def validate(self, value) -> bool:
+    @property
+    def name(self) -> str:
+        """
+        Get the name of the argument
+        Returns
+        -------
+        str
+        """
+        return self._name
+
+    @property
+    def choices(self) -> tuple:
+        """
+        Get the values choices of the argument.
+
+        Returns
+        -------
+        tuple
+            A tuple of choices the argument value can take.
+        """
+        return self.__choices
+
+    @property
+    def default(self) -> Any:
+        """
+        Get the default value of the argument.
+
+        Returns
+        -------
+        Any
+            The default value of the argument.
+        """
+        return self.__default
+
+    @property
+    def read_only(self) -> bool:
+        """
+        Check if the argument is read-only.
+
+        Returns
+        -------
+        bool
+            True if the argument is read-only, False otherwise.
+        """
+        return self.__read_only
+
+    @property
+    def required(self) -> bool:
+        """
+        Check if the argument is required.
+
+        Returns
+        -------
+        bool
+            True if the argument is required, False otherwise.
+        """
+        return self.__required
+
+    @property
+    def type(self) -> Type | tuple[Type]:
+        """
+        Get the data type(s) the argument value can take.
+
+        Returns
+        -------
+        Type | tuple[Type]
+            The data type of the argument value.
+        """
+        return self.__type
+
+    @property
+    def validator(self) -> Validator | tuple[Validator]:
+        """
+        Get the validator(s) of the argument.
+
+        Returns
+        -------
+        Validator | tuple[Validator]
+            The validator function or a tuple of validator functions.
+        """
+        return self.__validator
+
+    def validate(self, value: Any) -> bool:
+        """
+        Validate the argument value based on the specified rules.
+
+        Parameters
+        ----------
+        value : Any
+            The value to validate.
+
+        Returns
+        -------
+        bool
+            True if the value is valid, False otherwise.
+
+        Raises
+        ------
+        TypeError
+            If the value is not of the specified type.
+        ValueError
+            If the value is required but not provided, or if it is not among the specified choices.
+        """
         # Test type
         if (
                 value is not None
@@ -40,7 +179,7 @@ class Argument:
                 and (self.required or value is not None)
                 and value not in self.choices
         ):
-            raise ValueError(f'Option {self.name}: needs to be one of {self.__choices}.')
+            raise ValueError(f'Option {self.name}: {value} needs to be one of {self.__choices}.')
         # process all validators
         # map(lambda obj: getattr(obj, 'validate')(value), self.validators)
         if value is not None:
@@ -51,40 +190,26 @@ class Argument:
                     validator.validate(value)
         return True
 
-    @property
-    def choices(self) -> tuple:
-        return self.__choices
-
-    @property
-    def default(self) -> Any:
-        return self.__default
-
-    @property
-    def read_only(self) -> bool:
-        return self.__read_only
-
-    @property
-    def required(self) -> bool:
-        return self.__required
-
-    @property
-    def type(self) -> Type | tuple[Type]:
-        return self.__type
-
-    @property
-    def validator(self) -> Validator | tuple[Validator]:
-        return self.__validator
-
 
 class ArgumentHandler:
+    """
+    Handles the management of arguments for decorated classes or functions.
 
+    Methods
+    -------
+    get(key)
+        Retrieves the value of a specified argument.
+
+    set(key, value)
+        Sets the value of a specified argument.
+    """
     __arguments: dict[str, dict[str, Argument]] = {}
 
     @staticmethod
     def set_arguments(decorated: type, arguments: dict[str, Argument]):
         if not ArgumentHandler.__has_arguments(decorated):
             for key, value in arguments.items():
-                value.name = key
+                value._name = key
             decorated_id = ArgumentHandler.__get_decorated_id(decorated)
             ArgumentHandler.__arguments[decorated_id] = arguments
 
@@ -113,37 +238,83 @@ class ArgumentHandler:
         raise KeyError(f'The property {name} not exists for {self.__decorated}.')
 
     def get(self, key: str) -> Any:
+        """
+        Retrieves the value of a specified argument.
+
+        Parameters
+        ----------
+        key : str
+            The key of the argument.
+
+        Returns
+        -------
+        Any
+            The value of the specified argument.
+        """
         return self.__values.get(
             key,
             self.__get_argument(key).default
         )
 
     def set(self, key: str, value: Any) -> None:
+        """
+        Sets the value of a specified argument.
+
+        Parameters
+        ----------
+        key : str
+            The key of the argument.
+        value : Any
+            The new value for the argument.
+
+        Raises
+        -------
+        ValueError if the argument is allowed for read only.
+        """
         if self.__get_argument(key).read_only:
-            raise ValueError(f'The property {key} is read-only in {self.__decorated}.')
+            raise ValueError(f'The argument {key} is read-only in {self.__decorated}.')
         if self.__get_argument(key).validate(value):
             self.__values[key] = value
 
     def __validate(self) -> bool:
         props = ArgumentHandler.__arguments.get(self.__decorated)
         for key, prop in props.items():
-            prop.validate(self.__values.get(key))
+            prop.validate(self.get(key))
         return True
 
 
 def class_properties(**_properties):
+    """
+    Decorator for classes
+    Parameters
+    ----------
+    _properties
+
+    Returns
+    -------
+
+    """
     def properties_decorator(decorated_class) -> Type:
         class ClassProperties(decorated_class):
             def __init__(self, *args, **kwargs) -> None:
                 ArgumentHandler.set_arguments(decorated_class, _properties)
                 super().__init__(decorated_class, *args, **kwargs)
-                #super().validate()
         return ClassProperties
     return properties_decorator
 
 
 # Method arguments decorator
 def method_arguments(**_arguments):
+    """
+    Decorator for class methods
+    Parameters
+    ----------
+    _arguments
+
+    Returns
+    -------
+
+    """
     def arguments_decorator(decorated_func) -> Callable:
         def method(instance, *args, **kwargs):
             ArgumentHandler.set_arguments(decorated_func, _arguments)
@@ -154,6 +325,16 @@ def method_arguments(**_arguments):
 
 
 def function_arguments(**_arguments):
+    """
+    Decorator for functions
+    Parameters
+    ----------
+    _arguments
+
+    Returns
+    -------
+
+    """
     def arguments_decorator(decorated_func) -> Callable:
         def function(*args, **kwargs):
             ArgumentHandler.set_arguments(decorated_func, _arguments)

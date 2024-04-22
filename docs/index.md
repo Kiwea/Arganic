@@ -28,15 +28,43 @@ their codebase with ease.
 
 ### Pip
 
+Install Arganic via the pip command:
+
+    pip install arganic
+
 ### Git clone
+
+Clone the github repository:
+
+    git clone https://github.com/Kiwea/arganic
 
 ## Usage
 
 ### Decorating Classes
 
+Example on how to decorate a Class and access the arguments as class properties.
+
+Note: the class need to extends ArgumentHandler to implement get and set methods.
+
+``` py title="A simple Vehicle class with three arguments/properties."
+--8<-- "examples/class_vehicles.py"
+```
+
 ### Decorating Methods
 
+Example with a class method decorator
+
+``` py title="A simple method with two arguments."
+--8<-- "examples/class_method_drive.py"
+```
+
 ### Decorating functions
+
+The same example with a simple method.
+
+``` py title="A simple method with two arguments."
+--8<-- "examples/function_drive.py"
+```
 
 ### Using library
 
