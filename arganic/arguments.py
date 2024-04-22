@@ -236,16 +236,6 @@ class ArgumentHandler:
 
 
 def class_properties(**_properties):
-    """
-    Decorator for classes
-    Parameters
-    ----------
-    _properties
-
-    Returns
-    -------
-
-    """
     def properties_decorator(decorated_class) -> Type:
         class ClassProperties(decorated_class):
             def __init__(self, *args, **kwargs) -> None:
@@ -257,16 +247,6 @@ def class_properties(**_properties):
 
 # Method arguments decorator
 def method_arguments(**_arguments):
-    """
-    Decorator for class methods
-    Parameters
-    ----------
-    _arguments
-
-    Returns
-    -------
-
-    """
     def arguments_decorator(decorated_func) -> Callable:
         def method(instance, *args, **kwargs):
             ArgumentHandler.set_arguments(decorated_func, _arguments)
@@ -277,16 +257,6 @@ def method_arguments(**_arguments):
 
 
 def function_arguments(**_arguments):
-    """
-    Decorator for functions
-    Parameters
-    ----------
-    _arguments
-
-    Returns
-    -------
-
-    """
     def arguments_decorator(decorated_func) -> Callable:
         def function(*args, **kwargs):
             ArgumentHandler.set_arguments(decorated_func, _arguments)

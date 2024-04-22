@@ -87,7 +87,7 @@ It's possible to define your own validators by extending the Validator class.
 
 ## Contributing
 
-This project is open to contributors to participate :
+This project is open to contributors :
 
 Create a virtual env:
 

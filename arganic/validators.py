@@ -22,7 +22,7 @@ class Validator(ABC):
 
         Returns
         -------
-
+            bool
         """
         pass
 
@@ -45,7 +45,7 @@ class MinLength(Validator):
 
         Returns
         -------
-
+            bool
         """
         if len(value) < self.__min_length:
             raise ValueError(f"Min length is {self.__min_length}")
@@ -65,7 +65,7 @@ class Url(Validator):
 
         Returns
         -------
-
+            bool
         """
         pattern = r'^(?:http|ftp)s?://'
         if not re.match(pattern, value):
@@ -86,7 +86,7 @@ class Email(Validator):
 
         Returns
         -------
-
+            bool
         """
         pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         if not re.match(pattern, value):
@@ -113,7 +113,7 @@ class MaxLength(Validator):
 
         Returns
         -------
-
+            bool
         """
         if len(value) > self.__max_length:
             raise ValueError(f"Max length is {self.__max_length}")
@@ -133,7 +133,7 @@ class File(Validator):
 
         Returns
         -------
-
+            bool
         """
         if not os.path.isfile(value):
             raise FileNotFoundError(
@@ -157,7 +157,7 @@ class Dir(Validator):
 
         Returns
         -------
-
+            bool
         """
         if not os.path.isdir(value):
             raise FileNotFoundError(
