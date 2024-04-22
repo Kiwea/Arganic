@@ -3,9 +3,11 @@ from arganic.validators import Validator
 
 
 class Argument:
-    """Represents an argument with various properties.
+    """Argument class.
 
-    This class represents an argument with the following properties:
+    Represents an argument with properties such as name,
+    default value, and validation rules. Provides a method
+    for validation.
 
     Attributes
     ----------
@@ -28,18 +30,19 @@ class Argument:
     -------
     validate(value)
         Validate the argument value based on the specified rules.
+
+    Examples
+    --------
+
+    Example of a full-featured argument construction:
+
+    ``` py
+    --8<-- "examples/argument.py"
+    ```
+
+    <hr />
    """
     def __init__(self, *args: Any, **kwargs: Any) -> None:
-        """
-        Initialize the Argument object with specified properties.
-
-        Parameters
-        ----------
-        *args : Any
-            Variable length argument list.
-        **kwargs : Any
-            Arbitrary keyword arguments.
-       """
         kwargs = args[0] if args else kwargs
         self.__default: Any = kwargs.get('default', None)
         self._name: str = ''
@@ -56,37 +59,58 @@ class Argument:
 
     @property
     def name(self) -> str:
-        """ The argument name"""
+        """
+        The argument name
+        <hr />
+        """
         return self._name
 
     @property
     def choices(self) -> tuple:
-        """A tuple of choices the argument value can take."""
+        """
+        A tuple of choices the argument value can take.
+        <hr />
+        """
         return self.__choices
 
     @property
     def default(self) -> Any:
-        """The default value of the argument."""
+        """
+        The default value of the argument.
+        <hr />
+        """
         return self.__default
 
     @property
     def read_only(self) -> bool:
-        """True if the argument is read-only, False otherwise."""
+        """
+        True if the argument is read-only, False otherwise.
+        <hr />
+        """
         return self.__read_only
 
     @property
     def required(self) -> bool:
-        """True if the argument is required, False otherwise."""
+        """
+        True if the argument is required, False otherwise.
+        <hr />
+        """
         return self.__required
 
     @property
     def type(self) -> Type | tuple[Type]:
-        """The data type(s) the argument value can take."""
+        """
+        The data type(s) the argument value can take.
+        <hr />
+        """
         return self.__type
 
     @property
     def validator(self) -> Validator | tuple[Validator]:
-        """The validator object or a tuple of validator objects."""
+        """
+        The validator object or a tuple of validator objects.
+        <hr />
+        """
         return self.__validator
 
     def validate(self, value: Any) -> bool:
@@ -109,6 +133,16 @@ class Argument:
             If the value is not of the specified type.
         ValueError
             If the value is required but not provided, or if it is not among the specified choices.
+
+        Examples
+        --------
+        Example of a full-featured argument construction with validation:
+
+        ``` py
+        --8<-- "examples/argument_validate.py"
+        ```
+
+        <hr />
         """
         # Test type
         if (
@@ -145,15 +179,15 @@ class Argument:
 
 class ArgumentHandler:
     """
-    Handles the management of arguments for decorated classes or functions.
+    Handles arguments or properties for decorated classes, methods or functions.
 
     Methods
     -------
     get(key)
-        Retrieves the value of a specified argument.
+        Retrieves the value of a specified argument or property.
 
     set(key, value)
-        Sets the value of a specified argument.
+        Sets the value of a specified argument or property.
     """
     __arguments: dict[str, dict[str, Argument]] = {}
 
@@ -191,7 +225,7 @@ class ArgumentHandler:
 
     def get(self, key: str) -> Any:
         """
-        Retrieves the value of a specified argument.
+        Retrieves the value of a specified argument or property.
 
         Parameters
         ----------
@@ -210,7 +244,7 @@ class ArgumentHandler:
 
     def set(self, key: str, value: Any) -> None:
         """
-        Sets the value of a specified argument.
+        Sets the value of a specified argument or property.
 
         Parameters
         ----------
@@ -221,7 +255,8 @@ class ArgumentHandler:
 
         Raises
         -------
-        ValueError if the argument is allowed for read only.
+        ValueError
+            if the argument is allowed for read only.
         """
         if self.__get_argument(key).read_only:
             raise ValueError(f'The argument {key} is read-only in {self.__decorated}.')

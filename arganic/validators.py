@@ -6,7 +6,7 @@ from abc import abstractmethod, ABC
 
 class Validator(ABC):
     """
-    Abstract class for validators
+    Base class for validators.
     """
 
     def __init__(self):
@@ -15,108 +15,93 @@ class Validator(ABC):
     @abstractmethod
     def validate(self, value) -> bool:
         """
-        Abstract method to validate
+        Override this method on inherited classes.
+
         Parameters
         ----------
         value
+            The value to validate.
 
         Returns
         -------
-            bool
+        bool
+            The validate() methods needs to return True if the
+            validation pass or raises an exception if the validation fails.
         """
         pass
 
 
-class MinLength(Validator):
+class Dir(Validator):
     """
-    Minimum length
-    """
-
-    def __init__(self, min_length: int) -> None:
-        self.__min_length = min_length
-        super().__init__()
-
-    def validate(self, value) -> bool:
-        """
-        Validate Minl ength
-        Parameters
-        ----------
-        value
-
-        Returns
-        -------
-            bool
-        """
-        if len(value) < self.__min_length:
-            raise ValueError(f"Min length is {self.__min_length}")
-        return True
-
-
-class Url(Validator):
-    """
-    URL Validator
+    Directory Validator.
     """
     def validate(self, value) -> bool:
         """
-        Validate URL
+        Test the existence of a directory according to the path provided.
+
         Parameters
         ----------
-        value
-
+        value: str
+            Path to the directory that must exist on the file system.
         Returns
         -------
-            bool
+        bool
+            True if the directory exists.
+        Raises
+        ------
+        FileNotFoundError
+            If the directory does not exist on the file system.
+
+        Examples
+        --------
+
+        ``` py
+        --8<-- "examples/validator_dir.py"
+        ```
+
         """
-        pattern = r'^(?:http|ftp)s?://'
-        if not re.match(pattern, value):
-            raise ValueError(f"Url not valid {value}")
+        if not os.path.isdir(value):
+            raise FileNotFoundError(
+                errno.ENOENT,
+                os.strerror(errno.ENOENT),
+                value
+            )
         return True
 
 
 class Email(Validator):
     """
-    Email Validator
+    Email address Validator.
     """
     def validate(self, value) -> bool:
         """
-        Validate Email
+        Validates the syntax of an email address.
         Parameters
         ----------
-        value
+        value: str
+            Email address whose syntax must be checked.
 
         Returns
         -------
-            bool
+        bool
+            If the value provided is a correct email address format.
+
+        Raises
+        ------
+        ValueError
+            If the value provided is not a valid email address.
+        Examples
+        --------
+
+        ``` py
+        --8<-- "examples/validator_email.py"
+        ```
+
         """
         pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         if not re.match(pattern, value):
-            raise ValueError(f"Email not valid {value}")
-        return True
-
-
-class MaxLength(Validator):
-    """
-    Max length validator
-    """
-
-    def __init__(self, max_length: int) -> None:
-        self.__max_length = max_length
-        super().__init__()
-
-    def validate(self, value) -> bool:
-        """
-        Validate Max length
-
-        Parameters
-        ----------
-        value
-
-        Returns
-        -------
-            bool
-        """
-        if len(value) > self.__max_length:
-            raise ValueError(f"Max length is {self.__max_length}")
+            raise ValueError(f"The value provided: '{value}' is not a "
+                             f"correctly formatted email address.")
         return True
 
 
@@ -126,14 +111,27 @@ class File(Validator):
     """
     def validate(self, value) -> bool:
         """
-        Validate File
+        Test the existence of a file according to the path provided.
+
         Parameters
         ----------
-        value
-
+        value: str
+            Path to the file that must exist on the file system.
         Returns
         -------
-            bool
+        bool
+            True if the file exists.
+        Raises
+        ------
+        FileNotFoundError
+            If the file does not exist on the file system.
+
+        Examples
+        --------
+
+        ``` py
+        --8<-- "examples/validator_file.py"
+        ```
         """
         if not os.path.isfile(value):
             raise FileNotFoundError(
@@ -144,25 +142,144 @@ class File(Validator):
         return True
 
 
-class Dir(Validator):
+class MaxLength(Validator):
     """
-    Dir Validator
+    Maximum length validator.
     """
+
+    def __init__(self, max_length: int) -> None:
+        """
+        Max length Validator constructor.
+
+        Parameters
+        ----------
+        max_length: int
+            The maximum length that the values to validate must not exceed.
+        """
+        self.__max_length = max_length
+        super().__init__()
+
     def validate(self, value) -> bool:
         """
-        Validate Dir
+        Validates a value whose maximum length must not be greater than the value
+        specified in the validator constructor.
+
+        The value must be of a type supporting the [builtin len() Python function](https://docs.python.org/3/library/functions.html#len).
+
         Parameters
         ----------
         value
+            The value to validate.
 
         Returns
         -------
-            bool
+        bool
+            True if the validation succeeded.
+
+        Raises
+        ------
+        TypeError
+            If the length of the value is longer than the specified maximum length.
+
+        Examples
+        --------
+
+        ``` py
+        --8<-- "examples/validator_max_length.py"
+        ```
+
         """
-        if not os.path.isdir(value):
-            raise FileNotFoundError(
-                errno.ENOENT,
-                os.strerror(errno.ENOENT),
-                value
-            )
+        if len(value) > self.__max_length:
+            raise ValueError(f"The length of the value: '{value}' is longer than the "
+                             f"specified maximum length: {self.__max_length}")
+        return True
+
+
+class MinLength(Validator):
+    """
+    Minimum length validator.
+    """
+
+    def __init__(self, min_length: int) -> None:
+        """
+        Max length Validator constructor.
+
+        Parameters
+        ----------
+        min_length: int
+            The minimum length that the value must be.
+        """
+        self.__min_length = min_length
+        super().__init__()
+
+    def validate(self, value) -> bool:
+        """
+        Verifies that the provided value have a length must be
+        at least the minimum value given in the validator constructor.
+
+        The value must be of a type supporting the [builtin len() Python function](https://docs.python.org/3/library/functions.html#len).
+
+        Parameters
+        ----------
+        value
+            The value to validate.
+
+        Returns
+        -------
+        bool
+            True if the validation succeeded.
+
+        Raises
+        ------
+        TypeError
+            If the length of the value is shorter than the specified minimum length.
+
+        Examples
+        --------
+
+        ``` py
+        --8<-- "examples/validator_min_length.py"
+        ```
+
+        """
+        if len(value) < self.__min_length:
+            raise ValueError(f"The length of the value: '{value}' is shorter than the "
+                             f"specified minimum length: {self.__min_length}")
+        return True
+
+
+class Url(Validator):
+    """
+    URL Validator.
+    """
+    def validate(self, value) -> bool:
+        """
+        Validate if an URL is well formatted.
+        supported protocols: http, https, ftp, ftps.
+
+        Parameters
+        ----------
+        value: str
+            The value of the URL to validate.
+
+        Returns
+        -------
+        bool
+            True if the URL is well formatted.
+
+        Raises
+        ------
+        ValueError
+            If the provided value is an invalid Url.
+
+        Examples
+        --------
+
+        ``` py
+        --8<-- "examples/validator_url.py"
+        ```
+        """
+        pattern = r'^(?:http|ftp)s?://'
+        if not re.match(pattern, value):
+            raise ValueError(f"The Url: {value} is not well formatted.")
         return True
