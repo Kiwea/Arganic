@@ -2,7 +2,7 @@
 
 ***Arganic*** is a simple and lightweight **Python library** making it easy to manage **Arguments** for **Classes**, **Methods** or **Functions**.
 
-The library provides a very simpel and comprehensive set of decorators with advanced features such as
+The library provides a very simple and comprehensive set of decorators with advanced features such as
 **required arguments**, **validators**, **type checking**,
 **read/write accesses**, **default values**, and **choices**.
 
