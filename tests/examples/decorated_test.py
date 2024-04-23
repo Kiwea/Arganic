@@ -1,4 +1,4 @@
-from tests.decorated import DecoratedClass, decorated_function
+from decorated import DecoratedClass, decorated_function
 
 
 class TestProperties:
@@ -89,7 +89,7 @@ class TestProperties:
                 int_prop=1,
                 is_required='dfr',
                 is_choices='a',
-                is_dir='tests/test_dir'
+                is_dir='tests/examples/validate_dir'
             )
         except FileNotFoundError:
             assert False
@@ -116,8 +116,8 @@ class TestProperties:
                 int_prop=1,
                 is_required='dfr',
                 is_choices='a',
-                is_dir='tests/test_dir',
-                is_file='tests/test_dir/test_file.txt'
+                is_dir='tests/examples/validate_dir',
+                is_file='tests/examples/validate_dir/validate_file.txt'
             )
         except FileNotFoundError:
             assert False
@@ -130,7 +130,7 @@ class TestProperties:
                 int_prop=1,
                 is_required='dfr',
                 is_choices='a',
-                is_dir='tests/test_dir',
+                is_dir='tests/examples/validate_dir',
                 is_file='fff'
             )
         except FileNotFoundError:
@@ -151,8 +151,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='tests/test_dir',
-            is_file='tests/test_dir/test_file.txt'
+            is_dir='tests/examples/validate_dir',
+            is_file='tests/examples/validate_dir/validate_file.txt'
         )
         dc.decorated_method(first_arg=12.9)
         assert True
@@ -162,8 +162,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='tests/test_dir',
-            is_file='tests/test_dir/test_file.txt'
+            is_dir='tests/examples/validate_dir',
+            is_file='tests/examples/validate_dir/validate_file.txt'
         )
 
         try:
@@ -181,8 +181,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='tests/test_dir',
-            is_file='tests/test_dir/test_file.txt'
+            is_dir='tests/examples/validate_dir',
+            is_file='tests/examples/validate_dir/validate_file.txt'
         )
 
         try:
@@ -200,8 +200,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='tests/test_dir',
-            is_file='tests/test_dir/test_file.txt'
+            is_dir='tests/examples/validate_dir',
+            is_file='tests/examples/validate_dir/validate_file.txt'
         )
 
         try:
@@ -219,8 +219,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='tests/test_dir',
-            is_file='tests/test_dir/test_file.txt'
+            is_dir='tests/examples/validate_dir',
+            is_file='tests/examples/validate_dir/validate_file.txt'
         )
 
         try:
@@ -238,8 +238,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='tests/test_dir',
-            is_file='tests/test_dir/test_file.txt'
+            is_dir='tests/examples/validate_dir',
+            is_file='tests/examples/validate_dir/validate_file.txt'
         )
 
         try:
@@ -257,8 +257,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='tests/test_dir',
-            is_file='tests/test_dir/test_file.txt'
+            is_dir='tests/examples/validate_dir',
+            is_file='tests/examples/validate_dir/validate_file.txt'
         )
 
         try:
@@ -276,8 +276,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='tests/test_dir',
-            is_file='tests/test_dir/test_file.txt'
+            is_dir='tests/examples/validate_dir',
+            is_file='tests/examples/validate_dir/validate_file.txt'
         )
 
         try:
@@ -295,8 +295,8 @@ class TestProperties:
             int_prop=1,
             is_required='dfr',
             is_choices='a',
-            is_dir='tests/test_dir',
-            is_file='tests/test_dir/test_file.txt'
+            is_dir='tests/examples/validate_dir',
+            is_file='tests/examples/validate_dir/validate_file.txt'
         )
         assert dc.decorated_method(first_arg=444.5) == 444.5
 

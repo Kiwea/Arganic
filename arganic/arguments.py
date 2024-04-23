@@ -224,8 +224,19 @@ class ArgumentHandler:
             self.__decorated).get(name)
         if prop:
             return prop
-
         raise KeyError(f'The property {name} not exists for {self.__decorated}.')
+
+    @property
+    def values(self) -> dict:
+        """
+        The validated values.
+        <hr />
+        """
+        props = ArgumentHandler.__arguments.get(self.__decorated)
+        values = {}
+        for key, prop in props.items():
+            values[key] = self.get(key)
+        return values
 
     def get(self, key: str) -> Any:
         """
