@@ -10,6 +10,8 @@ By leveraging Python's `*args` and `**kwargs`, *Arganic*
 empowers developers to enhance the readability and functionality of
 their codebase with ease.
 
+[**Read the full documentation**](https://kiwea.github.io/Arganic/)
+
 ## Key Features:
 
  - **Decorators for Classes, Methods, and Functions**: Apply decorators to classes, methods, and functions to extend their functionality and behavior.
@@ -20,7 +22,14 @@ their codebase with ease.
  - **Default Values:** Set default values for function arguments, method parameters, and class properties to streamline code logic.
  - **Choice Selection:** Specify a list of choices for method arguments and function parameters, restricting input values to predefined options.
 
-[Read the full documentation](https://kiwea.github.io/Arganic/)
+### Decorators
+
+Arganic provides 3 distinct types of decorators:
+
+ - `@class_properties` : A decorator for class properties allowing you to define the data managed by the class during construction and then access these values within the class.
+ - `@method_arguments` : A decorator for class methods allowing you to constrain the arguments provided during the call but also to find the correctly formatted values within the method.
+ - `@function_arguments` : A decorator for functions allowing you to constrain the arguments provided during the call but also to find the correctly formatted values within the function.
+
 
 ## Installation
 
@@ -37,14 +46,6 @@ Install Arganic via the pip command:
 Clone the github repository:
 
     git clone https://github.com/Kiwea/arganic
-
-### Decorators
-
-Arganic provides 3 distinct types of decorators:
-
- - `@class_properties` : A decorator for class properties allowing you to define the data managed by the class during construction and then access these values within the class.
- - `@method_arguments` : A decorator for class methods allowing you to constrain the arguments provided during the call but also to find the correctly formatted values within the method.
- - `@function_arguments` : A decorator for functions allowing you to constrain the arguments provided during the call but also to find the correctly formatted values within the function.
 
 ## Contributing
 
