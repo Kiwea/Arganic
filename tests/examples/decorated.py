@@ -39,6 +39,7 @@ from arganic.validators import (
     )
 )
 class DecoratedClass(ArgumentHandler):
+
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         print(self.get('int_prop'))

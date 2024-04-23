@@ -7,6 +7,17 @@ from abc import abstractmethod, ABC
 class Validator(ABC):
     """
     Base class for validators.
+
+    It's possible to define your own validators by extending this class.
+
+    Examples
+    --------
+
+    Example of a custom validator.
+
+    ``` py linenums="1" hl_lines="5-12 15-24"
+    --8<-- "tests/examples/custom_validator.py"
+    ```
     """
 
     def __init__(self):
@@ -55,8 +66,8 @@ class Dir(Validator):
         Examples
         --------
 
-        ``` py
-        --8<-- "examples/validator_dir.py"
+        ``` py linenums="1" hl_lines="8 17"
+        --8<-- "tests/examples/validator_dir.py"
         ```
 
         <hr />
@@ -94,8 +105,8 @@ class Email(Validator):
         Examples
         --------
 
-        ``` py
-        --8<-- "examples/validator_email.py"
+        ``` py linenums="1" hl_lines="8 17"
+        --8<-- "tests/examples/validator_email.py"
         ```
 
         <hr />
@@ -131,8 +142,8 @@ class File(Validator):
         Examples
         --------
 
-        ``` py
-        --8<-- "examples/validator_file.py"
+        ``` py linenums="1" hl_lines="8 17"
+        --8<-- "tests/examples/validator_file.py"
         ```
 
         <hr />
@@ -165,10 +176,12 @@ class MaxLength(Validator):
 
     def validate(self, value) -> bool:
         """
-        Validates a value whose maximum length must not be greater than the value
-        specified in the validator constructor.
+        Validates a value whose maximum length must not be
+        greater than the value specified in the validator constructor.
 
-        The value must be of a type supporting the [builtin len() Python function](https://docs.python.org/3/library/functions.html#len).
+        The value must be of a type supporting the builtin
+        [len()](https://docs.python.org/3/library/functions.html#len)
+        Python function.
 
         Parameters
         ----------
@@ -183,20 +196,22 @@ class MaxLength(Validator):
         Raises
         ------
         TypeError
-            If the length of the value is longer than the specified maximum length.
+            If the length of the value is longer than the
+            specified maximum length.
 
         Examples
         --------
 
-        ``` py
-        --8<-- "examples/validator_max_length.py"
+        ``` py linenums="1" hl_lines="8 19 28 30"
+        --8<-- "tests/examples/validator_max_length.py"
         ```
 
         <hr />
         """
         if len(value) > self.__max_length:
-            raise ValueError(f"The length of the value: '{value}' is longer than the "
-                             f"specified maximum length: {self.__max_length}")
+            raise ValueError(f"The length of the value: '{value}' "
+                             f"is longer than the specified"
+                             f"maximum length: {self.__max_length}")
         return True
 
 
@@ -222,7 +237,9 @@ class MinLength(Validator):
         Verifies that the provided value have a length must be
         at least the minimum value given in the validator constructor.
 
-        The value must be of a type supporting the [builtin len() Python function](https://docs.python.org/3/library/functions.html#len).
+        The value must be of a type supporting the builtin
+        [len()](https://docs.python.org/3/library/functions.html#len)
+        Python function.
 
         Parameters
         ----------
@@ -237,20 +254,22 @@ class MinLength(Validator):
         Raises
         ------
         TypeError
-            If the length of the value is shorter than the specified minimum length.
+            If the length of the value is shorter than the
+            specified minimum length.
 
         Examples
         --------
 
-        ``` py
-        --8<-- "examples/validator_min_length.py"
+        ``` py linenums="1" hl_lines="8 18 27 29"
+        --8<-- "tests/examples/validator_min_length.py"
         ```
 
         <hr />
         """
         if len(value) < self.__min_length:
-            raise ValueError(f"The length of the value: '{value}' is shorter than the "
-                             f"specified minimum length: {self.__min_length}")
+            raise ValueError(f"The length of the value: '{value}' "
+                             f"is shorter than the specified"
+                             f"minimum length: {self.__min_length}")
         return True
 
 
@@ -281,8 +300,8 @@ class Url(Validator):
         Examples
         --------
 
-        ``` py
-        --8<-- "examples/validator_url.py"
+        ``` py linenums="1" hl_lines="8 17"
+        --8<-- "tests/examples/validator_url.py"
         ```
 
         <hr />

@@ -1,10 +1,6 @@
 # Arganic
 
-{==
-
-***Arganic*** is a lightweight **Python library** making it easy to manage **Arguments** for **Classes**, **Methods** or **Functions**.
-
-==}
+***Arganic*** is a simple and lightweight **Python library** making it easy to manage **Arguments** for **Classes**, **Methods** or **Functions**.
 
 The library provides a very simpel and comprehensive set of decorators with advanced features such as
 **required arguments**, **validators**, **type checking**,
@@ -24,13 +20,18 @@ their codebase with ease.
  - **Default Values:** Set default values for function arguments, method parameters, and class properties to streamline code logic.
  - **Choice Selection:** Specify a list of choices for method arguments and function parameters, restricting input values to predefined options.
 
+<p style="text-align: center">
+ [Read the full documentation](https://kiwea.github.io/Arganic/){ .md-button .md-button--primary }
+</p>
 ## Installation
 
 ### Pip
 
 Install Arganic via the pip command:
 
+
     pip install arganic
+
 
 ### Git clone
 
@@ -38,56 +39,19 @@ Clone the github repository:
 
     git clone https://github.com/Kiwea/arganic
 
-## Usage
+### Decorators
 
-### Decorating Classes
+Arganic provides 3 distinct types of decorators:
 
-Example on how to decorate a Class and access the arguments as class properties.
-
-Note: the class need to extends ArgumentHandler to implement get and set methods.
-
-``` py title="A simple Vehicle class with three arguments/properties."
---8<-- "examples/class_vehicles.py"
-```
-
-### Decorating Methods
-
-Example with a class method decorator
-
-``` py title="A simple method with two arguments."
---8<-- "examples/class_method_drive.py"
-```
-
-### Decorating functions
-
-The same example with a simple function.
-
-``` py title="A simple function with two arguments."
---8<-- "examples/function_drive.py"
-```
-
-### Arguments parameters
-
-List of the available parameters the Arguments class can take:
-
- - ***default***: (Any, optional) - The default value of the argument.
- - ***read_only***: (bool, Default=True) - The default value of the argument.
- - ***required***: (bool, default=True) – Whether the argument is required.
- - ***type***: (Type | tuple[Type], optional) – The data type(s) the argument value can take.
- - ***validator***: (Validator | tuple[Validator], optional) – A Validator object or list of Validator objects used to validate the argument value.
- - ***choices*** (tuple, optional) – A tuple of choices the argument value can take.
-
-### Custom validators
-
-It's possible to define your own validators by extending the Validator class.
-
-``` py title="A custom validator example."
---8<-- "examples/custom_validator.py"
-```
+ - `@class_properties` : A decorator for class properties allowing you to define the data managed by the class during construction and then access these values within the class.
+ - `@method_arguments` : A decorator for class methods allowing you to constrain the arguments provided during the call but also to find the correctly formatted values within the method.
+ - `@function_arguments` : A decorator for functions allowing you to constrain the arguments provided during the call but also to find the correctly formatted values within the function.
 
 ## Contributing
 
-This project is open to contributors :
+This project is open and gratefully accepts any form of contribution.
+
+### Contributing to the code
 
 Create a virtual env:
 
@@ -108,9 +72,9 @@ Update the documentation under the docs/
 
     mkdocs serve
 
-Submit a push request
+Submit a push request...
 
-Issues
+### Issues
 
 If you find a bug, please post an issue on the [issue tracker on GitHub](https://github.com/Kiwea/Arganic/issues).
 

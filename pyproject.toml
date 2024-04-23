@@ -1,7 +1,7 @@
 [project]
 name = "Arganic"
 version = "0.1"
-description = "Arganic is a Python library making it easy to manage arguments for classes, methods or functions."
+description = "Arganic is a simple and lightweight Python library making it easy to manage Arguments for Classes, Methods or Functions."
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [{name = "Kiwea"}]
