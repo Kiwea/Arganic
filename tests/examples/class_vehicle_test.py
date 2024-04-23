@@ -1,4 +1,4 @@
-from class_vehicle import Vehicle
+from tests.examples.class_vehicle import Vehicle
 
 
 class TestVehicle:

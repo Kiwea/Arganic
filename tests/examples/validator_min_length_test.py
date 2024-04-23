@@ -1,4 +1,4 @@
-from validator_min_length import min_len_1_handler, min_len_10_handler
+from tests.examples.validator_min_length import min_len_1_handler, min_len_10_handler
 
 
 class TestValidatorMinLength():

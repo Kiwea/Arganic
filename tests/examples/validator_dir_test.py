@@ -1,4 +1,4 @@
-from validator_dir import dir_handler
+from tests.examples.validator_dir import dir_handler
 
 
 class TestValidatorDir():

@@ -1,4 +1,4 @@
-from full_featured_argument import FullFeaturedArgument
+from tests.examples.full_featured_argument import FullFeaturedArgument
 
 class TestFullFeaturedArgument:
 

@@ -1,4 +1,4 @@
-from validator_max_length import max_len_10_handler, max_len_1_handler
+from tests.examples.validator_max_length import max_len_10_handler, max_len_1_handler
 
 
 class TestValidatorMaxLength():

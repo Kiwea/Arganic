@@ -1,4 +1,4 @@
-from validator_url import url_handler
+from tests.examples.validator_url import url_handler
 
 
 class TestValidatorUrl:

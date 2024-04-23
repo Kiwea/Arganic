@@ -1,4 +1,4 @@
-from custom_validator import CityValidator, drive
+from tests.examples.custom_validator import CityValidator, drive
 
 class CustomValidatorTest:
 

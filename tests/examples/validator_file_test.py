@@ -1,4 +1,4 @@
-from validator_file import file_handler
+from tests.examples.validator_file import file_handler
 
 
 class TestValidatorFile():

@@ -1,4 +1,4 @@
-from decorated import DecoratedClass, decorated_function
+from tests.examples.decorated import DecoratedClass, decorated_function
 
 
 class TestProperties:

@@ -1,4 +1,4 @@
-from validator_email import email_handler
+from tests.examples.validator_email import email_handler
 
 
 class TestValidatorEmail():
