@@ -270,23 +270,6 @@
         
   
   
-  
-    <li class="md-tabs__item">
-      <a href="../../examples/" class="md-tabs__link">
-        
-  
-    
-  
-  Examples
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
     
   
   
@@ -396,26 +379,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../../examples/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Examples
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -442,7 +405,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           
@@ -458,14 +421,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Reference
           </label>
@@ -621,6 +584,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#arganic.arguments.ArgumentHandler.values" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-attribute"></code>&nbsp;values
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#arganic.arguments.ArgumentHandler.get" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;get
@@ -640,6 +612,33 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arganic.arguments.class_properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;class_properties
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arganic.arguments.function_arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;function_arguments
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arganic.arguments.method_arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-function"></code>&nbsp;method_arguments
+    </span>
+  </a>
   
 </li>
       
@@ -801,7 +800,7 @@ for validation.</p>
             (<code>(<span title="typing.Type">Type</span> | tuple[<span title="typing.Type">Type</span>], optional)</code>)
         –
         <div class="doc-md-description">
-          <p>The data type of the argument value.</p>
+          <p>The data type(s) of the argument value.</p>
         </div>
       </li>
       <li class="field-body">
@@ -809,7 +808,8 @@ for validation.</p>
             (<code>(<a class="autorefs autorefs-internal" title="arganic.validators.Validator" href="../validators/#arganic.validators.Validator">Validator</a> | tuple[<a class="autorefs autorefs-internal" title="arganic.validators.Validator" href="../validators/#arganic.validators.Validator">Validator</a>], optional)</code>)
         –
         <div class="doc-md-description">
-          <p>A Validator object or list of Validator objects used to validate the argument value.</p>
+          <p>A Validator object or list of Validator objects
+used to validate the argument value.</p>
         </div>
       </li>
       <li class="field-body">
@@ -839,20 +839,94 @@ for validation.</p>
 
 <p><strong>Examples:</strong></p>
     <p>Example of a full-featured argument construction:</p>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">arganic.arguments</span> <span class="kn">import</span> <span class="n">Argument</span><span class="p">,</span> <span class="n">function_arguments</span>  <span class="c1"># Import Argument class.</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">arganic.validators</span> <span class="kn">import</span> <span class="n">MinLength</span><span class="p">,</span> <span class="n">MaxLength</span>  <span class="c1"># Import validators</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Argument example</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">Argument</span><span class="p">(</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">),</span>  <span class="c1"># Multiple types are supported.</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># This argument is not required.</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span>  <span class="c1"># A default value.</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">read_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># This Argument/property is not writeable.</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">],</span> <span class="p">(</span><span class="s1">&#39;fist&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">)),</span>  <span class="c1"># Available choices.</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">validator</span><span class="o">=</span><span class="p">(</span><span class="n">MinLength</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">MaxLength</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># Validators.</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">)</span>
-</span></code></pre></div>
+<div class="language-py highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span>
+<span class="normal"><a href="#__codelineno-0-40">40</a></span>
+<span class="normal"><a href="#__codelineno-0-41">41</a></span>
+<span class="normal"><a href="#__codelineno-0-42">42</a></span>
+<span class="normal"><a href="#__codelineno-0-43">43</a></span>
+<span class="normal"><a href="#__codelineno-0-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">arganic.arguments</span> <span class="kn">import</span> <span class="n">Argument</span><span class="p">,</span> <span class="n">class_properties</span><span class="p">,</span> <span class="n">ArgumentHandler</span>  <span class="c1"># Import Argument class.</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">arganic.validators</span> <span class="kn">import</span> <span class="n">MinLength</span><span class="p">,</span> <span class="n">MaxLength</span>  <span class="c1"># Import validators</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="c1"># Argument example</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="hll"><span class="nd">@class_properties</span><span class="p">(</span>
+</span></span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="hll">    <span class="n">arg1</span><span class="o">=</span><span class="n">Argument</span><span class="p">(</span>
+</span></span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="hll">        <span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">),</span>  <span class="c1"># Multiple types are supported.</span>
+</span></span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="hll">        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># This argument is not required.</span>
+</span></span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="hll">        <span class="n">default</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">,</span>  <span class="c1"># A default value.</span>
+</span></span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="hll">        <span class="n">read_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># This Argument/property is not writeable.</span>
+</span></span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="hll">        <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">],</span> <span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">)),</span>  <span class="c1"># Available choices.</span>
+</span></span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="hll">        <span class="n">validator</span><span class="o">=</span><span class="p">(</span><span class="n">MinLength</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">MaxLength</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># Validators.</span>
+</span></span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="hll">    <span class="p">)</span>
+</span></span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="hll"><span class="p">)</span>
+</span></span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="k">class</span> <span class="nc">FullFeaturedArgument</span><span class="p">(</span><span class="n">ArgumentHandler</span><span class="p">):</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="k">def</span> <span class="nf">get_arg1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">:</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;arg1&#39;</span><span class="p">)</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="c1"># &#39;first&#39; value is allowed in choices options</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="n">ffa1</span> <span class="o">=</span> <span class="n">FullFeaturedArgument</span><span class="p">(</span><span class="n">arg1</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="nb">print</span><span class="p">(</span><span class="n">ffa1</span><span class="o">.</span><span class="n">get_arg1</span><span class="p">())</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="c1"># arg1 is not required and will take de the default value &#39;first&#39;</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="n">ffa2</span> <span class="o">=</span> <span class="n">FullFeaturedArgument</span><span class="p">()</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="nb">print</span><span class="p">(</span><span class="n">ffa2</span><span class="o">.</span><span class="n">get_arg1</span><span class="p">())</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="c1"># arg1 can be a tuple</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="n">ffa3</span> <span class="o">=</span> <span class="n">FullFeaturedArgument</span><span class="p">(</span><span class="n">arg1</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">))</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="nb">print</span><span class="p">(</span><span class="n">ffa3</span><span class="o">.</span><span class="n">get_arg1</span><span class="p">())</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="c1"># arg1 can be a list</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="n">ffa4</span> <span class="o">=</span> <span class="n">FullFeaturedArgument</span><span class="p">(</span><span class="n">arg1</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">])</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="nb">print</span><span class="p">(</span><span class="n">ffa4</span><span class="o">.</span><span class="n">get_arg1</span><span class="p">())</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39"></a>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="c1"># arg1 can be set</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41"></a><span class="n">ffa4</span> <span class="o">=</span> <span class="n">FullFeaturedArgument</span><span class="p">(</span><span class="n">arg1</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">])</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42"></a><span class="nb">print</span><span class="p">(</span><span class="n">ffa4</span><span class="o">.</span><span class="n">get_arg1</span><span class="p">())</span>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="n">ffa4</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;arg1&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">)</span>
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="nb">print</span><span class="p">(</span><span class="n">ffa4</span><span class="o">.</span><span class="n">get_arg1</span><span class="p">())</span>
+</span></code></pre></div></td></tr></table></div>
 <hr />
 
 
@@ -884,7 +958,9 @@ for validation.</p>
 
   <div class="doc doc-contents ">
   
-      <p>A tuple of choices the argument value can take.</p>
+      <p><code>Optional</code></p>
+<p>A list of choices limiting the values that the supplied
+arguments can have.</p>
 <hr />
   </div>
 
@@ -908,7 +984,8 @@ for validation.</p>
 
   <div class="doc doc-contents ">
   
-      <p>The default value of the argument.</p>
+      <p><code>Optional</code></p>
+<p>The default value the argument will take if no value is provided.</p>
 <hr />
   </div>
 
@@ -956,8 +1033,8 @@ for validation.</p>
 
   <div class="doc doc-contents ">
   
-      <p>Default=True</p>
-<p>True if the argument is read-only, False otherwise.</p>
+      <p><code>Default=True</code></p>
+<p>The argument is read-only, so it can no longer be modified.</p>
 <hr />
   </div>
 
@@ -981,8 +1058,9 @@ for validation.</p>
 
   <div class="doc doc-contents ">
   
-      <p>Default=True</p>
-<p>True if the argument is required, False otherwise.</p>
+      <p><code>Default=True</code></p>
+<p>The argument is required if the value is missing:
+an Exception will occur.</p>
 <hr />
   </div>
 
@@ -1006,7 +1084,9 @@ for validation.</p>
 
   <div class="doc doc-contents ">
   
-      <p>The data type(s) the argument value can take.</p>
+      <p><code>Optional</code></p>
+<p>Defines the type(s) of values accepted for this argument,
+if the type provided is not valid an Exception will occur.</p>
 <hr />
   </div>
 
@@ -1030,7 +1110,9 @@ for validation.</p>
 
   <div class="doc doc-contents ">
   
-      <p>The validator object or a tuple of validator objects.</p>
+      <p><code>Optional</code></p>
+<p>One or more instances of <a class="autorefs autorefs-internal" href="../validators/#arganic.validators"><code>Validators</code></a>
+constraining the value that an argument can have.</p>
 <hr />
   </div>
 
@@ -1097,30 +1179,11 @@ for validation.</p>
             <code>ValueError</code>
           –
         <div class="doc-md-description">
-          <p>If the value is required but not provided, or if it is not among the specified choices.</p>
+          <p>If the value is required but not provided,
+or if it is not among the specified choices.</p>
         </div>
       </li>
   </ul>
-
-
-
-<p><strong>Examples:</strong></p>
-    <p>Example of a full-featured argument construction with validation:</p>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">arganic.arguments</span> <span class="kn">import</span> <span class="n">Argument</span>  <span class="c1"># Import Argument class.</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">arganic.validators</span> <span class="kn">import</span> <span class="n">MinLength</span><span class="p">,</span> <span class="n">MaxLength</span>  <span class="c1"># Import validators</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Argument example</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">Argument</span><span class="p">(</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="nb">type</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">),</span>  <span class="c1"># Multiple types are supported.</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># This argument is not required.</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span>  <span class="c1"># A default value.</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">read_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># This Argument/property is not writeable.</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">],</span> <span class="p">(</span><span class="s1">&#39;fist&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">)),</span>  <span class="c1"># Available choices.</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">validator</span><span class="o">=</span><span class="p">(</span><span class="n">MinLength</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">MaxLength</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># Validators.</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">)</span><span class="o">.</span><span class="n">validate</span><span class="p">([</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="s1">&#39;second&#39;</span><span class="p">])</span>  <span class="c1"># Value validation.</span>
-</span></code></pre></div>
-<hr />
 
   </div>
 
@@ -1149,7 +1212,12 @@ for validation.</p>
   <div class="doc doc-contents ">
 
   
-      <p>Handles arguments or properties for decorated classes, methods or functions.</p>
+      <p>Handles arguments or properties for decorated classes,
+methods or functions.</p>
+<p>Attributes</p>
+<hr />
+<p>values: dict
+    The provided arguments values validated and correctly formatted.</p>
 
 
 
@@ -1181,6 +1249,30 @@ for validation.</p>
 
 
 
+
+<div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="arganic.arguments.ArgumentHandler.values" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-attribute"></code>          <span class="doc doc-object-name doc-attribute-name">values</span>
+
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">values</span><span class="p">:</span> <span class="n">dict</span>
+</span></code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>The validated values.</p>
+<hr />
+  </div>
+
+</div>
 
 
 
@@ -1297,6 +1389,168 @@ for validation.</p>
 
 </div>
 
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="arganic.arguments.class_properties" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>          <span class="doc doc-object-name doc-function-name">class_properties</span>
+
+
+</h2>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">class_properties</span><span class="p">(</span><span class="o">**</span><span class="n">_properties</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="arganic.arguments.Argument" href="#arganic.arguments.Argument">Argument</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="typing.Callable">Callable</span></span>
+</span></code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Decorator for class properties.</p>
+<p>A decorator for class properties allowing you to define the data
+managed by the class during construction and then access these
+values within the class.</p>
+
+
+
+  <p>Parameters:</p>
+  <ul>
+      <li class="field-body">
+        <b><code>_properties</code></b>
+            (<code><a class="autorefs autorefs-internal" title="arganic.arguments.Argument" href="#arganic.arguments.Argument">Argument</a></code>, default:
+                <code>{}</code>
+)
+        –
+        <div class="doc-md-description">
+          <p>A dictionary of the <a class="autorefs autorefs-internal" href="#arganic.arguments.Argument">Arguments</a>
+the decorator will handle.</p>
+        </div>
+      </li>
+  </ul>
+
+
+
+  <p>Returns:</p>
+  <ul>
+      <li class="field-body">
+            <code><span title="typing.Callable">Callable</span></code>
+        –
+        <div class="doc-md-description">
+          <p>The decorator function.</p>
+      </div>
+      </li>
+  </ul>
+
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="arganic.arguments.function_arguments" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>          <span class="doc doc-object-name doc-function-name">function_arguments</span>
+
+
+</h2>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">function_arguments</span><span class="p">(</span><span class="o">**</span><span class="n">_arguments</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="arganic.arguments.Argument" href="#arganic.arguments.Argument">Argument</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="typing.Callable">Callable</span></span>
+</span></code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Decorator for function arguments.</p>
+<p>A decorator for functions allowing you to constrain the arguments
+provided during the call but also to find the correctly formatted values
+within the function.</p>
+
+
+
+  <p>Parameters:</p>
+  <ul>
+      <li class="field-body">
+        <b><code>_arguments</code></b>
+            (<code><a class="autorefs autorefs-internal" title="arganic.arguments.Argument" href="#arganic.arguments.Argument">Argument</a></code>, default:
+                <code>{}</code>
+)
+        –
+        <div class="doc-md-description">
+          <p>A dictionary of the <a class="autorefs autorefs-internal" href="#arganic.arguments.Argument">Arguments</a>
+the decorator will handle.</p>
+        </div>
+      </li>
+  </ul>
+
+
+
+  <p>Returns:</p>
+  <ul>
+      <li class="field-body">
+            <code><span title="typing.Callable">Callable</span></code>
+        –
+        <div class="doc-md-description">
+          <p>The decorator function.</p>
+      </div>
+      </li>
+  </ul>
+
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h2 id="arganic.arguments.method_arguments" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-function"></code>          <span class="doc doc-object-name doc-function-name">method_arguments</span>
+
+
+</h2>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">method_arguments</span><span class="p">(</span><span class="o">**</span><span class="n">_arguments</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-internal" title="arganic.arguments.Argument" href="#arganic.arguments.Argument">Argument</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><span title="typing.Callable">Callable</span></span>
+</span></code></pre></div>
+
+  <div class="doc doc-contents ">
+  
+      <p>Decorator for method arguments.</p>
+<p>A decorator for class methods allowing you to constrain the arguments
+provided during the call but also to find the correctly formatted
+values within the method.</p>
+
+
+
+  <p>Parameters:</p>
+  <ul>
+      <li class="field-body">
+        <b><code>_arguments</code></b>
+            (<code><a class="autorefs autorefs-internal" title="arganic.arguments.Argument" href="#arganic.arguments.Argument">Argument</a></code>, default:
+                <code>{}</code>
+)
+        –
+        <div class="doc-md-description">
+          <p>A dictionary of the <a class="autorefs autorefs-internal" href="#arganic.arguments.Argument">Arguments</a>
+the decorator will handle.</p>
+        </div>
+      </li>
+  </ul>
+
+
+
+  <p>Returns:</p>
+  <ul>
+      <li class="field-body">
+            <code><span title="typing.Callable">Callable</span></code>
+        –
+        <div class="doc-md-description">
+          <p>The decorator function.</p>
+      </div>
+      </li>
+  </ul>
+
+  </div>
+
+</div>
 
 
 
