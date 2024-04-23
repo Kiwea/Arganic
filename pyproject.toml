@@ -29,4 +29,4 @@ Issues = "https://github.com/kiwea/arganic/issues"
 CI = "https://github.com/kiwea/arganic/actions"
 
 [project.optional-dependencies]
-test = ["pytest", "pytest-cov", "mkdocs", "mkdocs-material", "mkdocstrings[python]"]
+test = ["pytest", "pytest-cov", "mkdocs", "mkdocs-material", "mkdocstrings[python]", "mkdocs-section-index"]

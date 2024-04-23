@@ -24,6 +24,9 @@ their codebase with ease.
  - **Default Values:** Set default values for function arguments, method parameters, and class properties to streamline code logic.
  - **Choice Selection:** Specify a list of choices for method arguments and function parameters, restricting input values to predefined options.
 
+<p style="text-align: center" markdown>
+ [Read the full documentation](https://kiwea.github.io/Arganic/){ .md-button .md-button--primary }
+</p>
 ## Installation
 
 ### Pip

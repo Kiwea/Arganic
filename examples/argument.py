@@ -1,4 +1,4 @@
-from arganic.arguments import Argument  # Import Argument class.
+from arganic.arguments import Argument, function_arguments  # Import Argument class.
 from arganic.validators import MinLength, MaxLength  # Import validators
 
 

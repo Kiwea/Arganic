@@ -60,7 +60,7 @@ class Argument:
     @property
     def name(self) -> str:
         """
-        The argument name
+        The argument name.
         <hr />
         """
         return self._name
@@ -84,6 +84,8 @@ class Argument:
     @property
     def read_only(self) -> bool:
         """
+        Default=True
+
         True if the argument is read-only, False otherwise.
         <hr />
         """
@@ -92,6 +94,8 @@ class Argument:
     @property
     def required(self) -> bool:
         """
+        Default=True
+
         True if the argument is required, False otherwise.
         <hr />
         """
@@ -230,12 +234,12 @@ class ArgumentHandler:
         Parameters
         ----------
         key : str
-            The key of the argument.
+            The key of the argument or property to retrieve.
 
         Returns
         -------
         Any
-            The value of the specified argument.
+            The value of the argument or property.
         """
         return self.__values.get(
             key,
@@ -244,19 +248,19 @@ class ArgumentHandler:
 
     def set(self, key: str, value: Any) -> None:
         """
-        Sets the value of a specified argument or property.
+        Sets the value of arguments or properties to the specified key.
 
         Parameters
         ----------
         key : str
-            The key of the argument.
+            The key of the argument to set.
         value : Any
             The new value for the argument.
 
         Raises
         -------
         ValueError
-            if the argument is allowed for read only.
+            if the argument is not writeable.
         """
         if self.__get_argument(key).read_only:
             raise ValueError(f'The argument {key} is read-only in {self.__decorated}.')

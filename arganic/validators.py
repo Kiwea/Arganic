@@ -59,6 +59,7 @@ class Dir(Validator):
         --8<-- "examples/validator_dir.py"
         ```
 
+        <hr />
         """
         if not os.path.isdir(value):
             raise FileNotFoundError(
@@ -97,6 +98,7 @@ class Email(Validator):
         --8<-- "examples/validator_email.py"
         ```
 
+        <hr />
         """
         pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         if not re.match(pattern, value):
@@ -132,6 +134,8 @@ class File(Validator):
         ``` py
         --8<-- "examples/validator_file.py"
         ```
+
+        <hr />
         """
         if not os.path.isfile(value):
             raise FileNotFoundError(
@@ -188,6 +192,7 @@ class MaxLength(Validator):
         --8<-- "examples/validator_max_length.py"
         ```
 
+        <hr />
         """
         if len(value) > self.__max_length:
             raise ValueError(f"The length of the value: '{value}' is longer than the "
@@ -241,6 +246,7 @@ class MinLength(Validator):
         --8<-- "examples/validator_min_length.py"
         ```
 
+        <hr />
         """
         if len(value) < self.__min_length:
             raise ValueError(f"The length of the value: '{value}' is shorter than the "
@@ -278,6 +284,8 @@ class Url(Validator):
         ``` py
         --8<-- "examples/validator_url.py"
         ```
+
+        <hr />
         """
         pattern = r'^(?:http|ftp)s?://'
         if not re.match(pattern, value):
